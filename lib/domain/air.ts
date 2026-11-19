@@ -2,8 +2,12 @@ import type { Air } from "./model";
 
 // AirNow's US AQI categories apply to the rounded, dimensionless index.
 const bands = [
-  [50, "Good"], [100, "Moderate"], [150, "Unhealthy for Sensitive Groups"],
-  [200, "Unhealthy"], [300, "Very Unhealthy"], [Infinity, "Hazardous"],
+  [50, "Good"],
+  [100, "Moderate"],
+  [150, "Unhealthy for Sensitive Groups"],
+  [200, "Unhealthy"],
+  [300, "Very Unhealthy"],
+  [Infinity, "Hazardous"],
 ] as const;
 export function category(aqi: number | null | undefined): string {
   if (aqi == null || !Number.isFinite(aqi) || aqi < 0) return "Unavailable";

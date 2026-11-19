@@ -1,7 +1,23 @@
 import { z } from "zod";
 
-export const goals = ["Reduce exposure", "Reduce emissions", "Improve indoor air", "Protect sensitive members", "Save money", "Build sustainable habits"] as const;
-export const modes = ["Car", "Carpool", "Motorcycle", "Bus", "Rail", "Walk", "Cycle", "Remote"] as const;
+export const goals = [
+  "Reduce exposure",
+  "Reduce emissions",
+  "Improve indoor air",
+  "Protect sensitive members",
+  "Save money",
+  "Build sustainable habits",
+] as const;
+export const modes = [
+  "Car",
+  "Carpool",
+  "Motorcycle",
+  "Bus",
+  "Rail",
+  "Walk",
+  "Cycle",
+  "Remote",
+] as const;
 export type Mode = (typeof modes)[number];
 export const personas = ["Family", "Commuter", "Organizer"] as const;
 export const budgets = ["Low", "Moderate", "Flexible"] as const;
@@ -31,15 +47,30 @@ export const profileSchema = z.object({
   windows: z.boolean(),
   purifier: z.boolean(),
   budget: z.enum(budgets),
-  goals: z.array(z.string().refine(value => goals.some(goal => goal === value))).max(goals.length),
+  goals: z
+    .array(z.string().refine((value) => goals.some((goal) => goal === value)))
+    .max(goals.length),
 });
 export type Profile = z.infer<typeof profileSchema>;
 export const defaultProfile: Profile = {
   location: { name: "Jaipur", latitude: 26.9124, longitude: 75.7873 },
-  persona: "Family", members: 3, children: true, olderAdults: false, sensitive: false,
-  home: "Apartment", mode: "Car", distance: 10, wake: "07:00", commute: "09:00",
-  finish: "17:30", exercise: true, exhaust: false, windows: true, purifier: false,
-  budget: "Low", goals: ["Reduce exposure", "Improve indoor air"],
+  persona: "Family",
+  members: 3,
+  children: true,
+  olderAdults: false,
+  sensitive: false,
+  home: "Apartment",
+  mode: "Car",
+  distance: 10,
+  wake: "07:00",
+  commute: "09:00",
+  finish: "17:30",
+  exercise: true,
+  exhaust: false,
+  windows: true,
+  purifier: false,
+  budget: "Low",
+  goals: ["Reduce exposure", "Improve indoor air"],
 };
 
 export interface Air {
