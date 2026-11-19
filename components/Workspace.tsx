@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import {
   createContext,
   useContext,
@@ -84,6 +84,7 @@ export function Workspace({ children }: { children: React.ReactNode }) {
   const closeMenu = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     if (!open) return;
+    const trigger = menuTrigger.current;
     closeMenu.current?.focus();
     const keyboard = (event: KeyboardEvent) => {
       if (event.key === "Escape") menu(false);
@@ -97,7 +98,7 @@ export function Workspace({ children }: { children: React.ReactNode }) {
     return () => {
       window.removeEventListener("keydown", keyboard);
       wide.removeEventListener("change", resize);
-      menuTrigger.current?.focus();
+      trigger?.focus();
     };
   }, [open]);
   const [profile, storeProfile] = useDeviceValue(
@@ -290,7 +291,7 @@ export function Workspace({ children }: { children: React.ReactNode }) {
               children
             ) : (
               <div role="status" className="skeleton">
-                Loading workspace…
+                Loading workspaceâ€¦
               </div>
             )}
           </main>
